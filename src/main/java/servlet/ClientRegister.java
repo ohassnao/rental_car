@@ -68,7 +68,7 @@ public class ClientRegister extends HttpServlet {
                 // Commit the transaction
                 tx.commit();
 
-                out.println("Registration successful!");
+                response.sendRedirect("index.html");
             }
         } catch (Exception e) {
             e.printStackTrace();

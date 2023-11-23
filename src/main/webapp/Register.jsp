@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="St	yle.css">
 </head>
 <body class="align">
 
@@ -56,7 +56,7 @@
 
     </form>
 
-    <p class="text--center"> <a href="index.jsp">Back to main page</a> <svg class="icon">
+    <p class="text--center"> <a href="index.html">Back to main page</a> <svg class="icon">
         <use xlink:href="#icon-arrow-right"></use>
       </svg></p>
 
