@@ -1,20 +1,13 @@
 package classes;
 import java.sql.Date;
 
+import jakarta.persistence.*;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "reservation")
-public class Reservation {
+public class Reservation  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,19 +20,10 @@ public class Reservation {
     private Date dateFin;
 
     @ManyToOne
+    @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID_CLIENT")
     private Client client;
 
-//    @ManyToOne
-//    @JoinColumn (name="ID")
-//    private Voiture voiture;
-//    
-//    @OneToOne
-//    @JoinColumn(name="ID")
-//    private Facture facture;
-    
-//    @ManyToOne
-//    @JoinColumn(name = "ID_PERSONNELAGENCE") // This creates a foreign key column in the Reservation table
-//    private PersonnelAgence personnelAgence;
+
 
     public Reservation() {
         // Default no-argument constructor
@@ -51,6 +35,8 @@ public class Reservation {
 //        this.client = client;
 //        this.voiture = voiture;
     }
+
+    
 
     // Getters and Setters
     public Long getId() {

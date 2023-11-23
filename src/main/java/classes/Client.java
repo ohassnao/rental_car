@@ -1,7 +1,9 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,9 +42,7 @@ public class Client {
     private String email;
     
     
-    @OneToMany(mappedBy = "client" , fetch = FetchType.LAZY)
-    private List<Reservation> reservation;
-    
+
  
     
 
@@ -51,6 +51,9 @@ public class Client {
         // Default no-argument constructor
     }
 
+    
+
+    
     public Client(String nom, String prenom, String adresse, String email, String motDePasse) {
         this.nom = nom;
         this.prenom = prenom;
