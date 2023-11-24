@@ -1,4 +1,4 @@
-package classes;
+package DTO;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;

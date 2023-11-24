@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> 
+<%@page import="java.util.List"%>
+<%@page import="DTO.Voiture"%>
+<%@page import="service.VoitureService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%
 	String name = request.getParameter("nom");
@@ -117,19 +121,21 @@
                     data-target="#time" data-toggle="datetimepicker" />
             </div>
         </div>
-        <select class="custom-select px-4 mb-3" style="height: 50px;">
-<%
-    java.util.ArrayList<String> marqueList = (java.util.ArrayList<String>) request.getAttribute("marqueList");
-    if (marqueList != null) {
-        for (String marque : marqueList) {
-%>
-        <option value="<%= marque %>"><%= marque %></option>
-<%
-        }
-    }
-%>
-			
-        </select>
+        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+        		<select class="custom-select px-4 mb-3" style="height: 50px;">
+						<%
+							VoitureService voitureService = new VoitureService();
+							List<Voiture> voiture = voitureService.getAllVoiture();
+							for (Voiture v : voiture) {
+						%>
+							        				<option value="<%=v.getMarque()%>"><%=v.getMarque()%></option>
+
+						<%
+							}
+						%>
+        		</select>
+                </div>
+        
         <div class="col-xl-2 col-lg-4 col-md-6 px-2">
             <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
         </div>

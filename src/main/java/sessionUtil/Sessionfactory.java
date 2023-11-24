@@ -1,4 +1,4 @@
-package session;
+package sessionUtil;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

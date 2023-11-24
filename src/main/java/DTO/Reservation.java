@@ -1,4 +1,4 @@
-package classes;
+package DTO;
 import java.sql.Date;
 
 import jakarta.persistence.*;
@@ -22,6 +22,10 @@ public class Reservation  {
     @ManyToOne
     @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID_CLIENT")
     private Client client;
+    
+    @OneToOne
+    @JoinColumn(name = "ID_VOITURE", referencedColumnName = "ID_VOITURE")
+    private Voiture voitures;
 
 
 

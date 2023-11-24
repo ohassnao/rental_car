@@ -1,5 +1,4 @@
-package classes;
-
+package DTO;
 import java.sql.Date;
 
 import jakarta.persistence.Entity;
@@ -10,8 +9,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+
 @Entity
-public class Facture {
+public class PaiementEnLigne {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,37 +19,40 @@ public class Facture {
     private double montant;
 
     @Temporal(TemporalType.DATE)
-    private Date dateFacturation;
+    private Date datePaiement;
 
 
+    
     @OneToOne
-    @JoinColumn(name="ID_RESERVATION")
-    private Reservation reservation;
+    @JoinColumn(name= "ID_RECU")
+    private Recu recu;
+    
+    @OneToOne
+    @JoinColumn(name= "ID_FACTURE")
+    private Facture factures;
 
-    public Facture() {
+    public PaiementEnLigne() {
         // Default no-argument constructor
     }
 
-    public Facture(double montant, Date dateFacturation, Client client, Reservation reservation) {
+    public PaiementEnLigne(double montant, Date datePaiement) {
         this.montant = montant;
-        this.dateFacturation = dateFacturation;
-        this.reservation = reservation;
+        this.datePaiement = datePaiement;
     }
 
     // Getters and Setters
 
     // Other methods
-    public void genererFacturePDF() {
-        // Add logic to generate a PDF invoice here
+    public void effectuerPaiement() {
+        // Add logic to process online payment here
     }
 
     @Override
     public String toString() {
-        return "Facture{" +
+        return "PaiementEnLigne{" +
                 "id=" + id +
                 ", montant=" + montant +
-                ", dateFacturation=" + dateFacturation +
-                ", reservation=" + reservation +
+                ", datePaiement=" + datePaiement +
                 '}';
     }
 }

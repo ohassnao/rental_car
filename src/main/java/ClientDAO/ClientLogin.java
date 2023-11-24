@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import classes.Client; // Replace "Client" with your entity class for clients
+import DTO.Client; // Replace "Client" with your entity class for clients
 
 @WebServlet("/Login")
 public class ClientLogin extends HttpServlet {

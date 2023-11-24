@@ -13,7 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import classes.Client;
+import DTO.Client;
 
 @WebServlet("/Register")
 public class ClientRegister extends HttpServlet {

@@ -1,4 +1,4 @@
-package classes;
+package DTO;
 import java.sql.Date;
 
 import jakarta.persistence.Entity;

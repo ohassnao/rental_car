@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>VoitureDAO.Fetchmarque</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>VoitureServlet</servlet-name>
+  	<display-name>VoitureServlet</display-name>
+  	<description></description>
+  	<servlet-class>VoitureDAO.VoitureServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Fetchmarque</servlet-name>
   	<url-pattern>/Fetchmarque</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VoitureServlet</servlet-name>
+  	<url-pattern>/VoitureServlet</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -1,5 +1,6 @@
-package classes;
+package DTO;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,16 +15,20 @@ public class Voiture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long ID_VOITURE;
+    
+    @Column(name="Marque")
     private String marque;
+    
+    @Column(name="Modele")
     private String modele;
+    
+    @Column(name="Annee")
     private int annee;
+    
+    @Column(name="Disponibilite")
     private boolean disponibilite;
     
-    @ManyToOne
-    @JoinColumn(name="ID")
-    private Reservation Resevations;
-
     public Voiture() {
         // Default no-argument constructor
     }
@@ -37,11 +42,11 @@ public class Voiture {
 
     // Getters and Setters
     public Long getId() {
-        return id;
+        return ID_VOITURE;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.ID_VOITURE = id;
     }
 
     public String getMarque() {
@@ -80,7 +85,7 @@ public class Voiture {
     @Override
     public String toString() {
         return "Voiture{" +
-                "id=" + id +
+                "id=" + ID_VOITURE +
                 ", marque='" + marque + '\'' +
                 ", modele='" + modele + '\'' +
                 ", annee=" + annee +
