@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> 
+
+<%
+	String name = request.getParameter("nom");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,38 +35,32 @@
 </head>
 
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
-        <div class="row">
-            <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+212 10 19 24 16</a>
+   <!-- Topbar Start -->
+<div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
+    <div class="row">
+        <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+212 10 19 24 16</a>
+                <span class="text-body">|</span>
+                <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>Dreamcars@gmail.com</a>
+                <% 
+                    // Retrieve the client's name from the request attribute
+                    String clientName = (String) request.getAttribute("nom");
+                    if (clientName != null && !clientName.isEmpty()) {
+                %>
                     <span class="text-body">|</span>
-                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>Dreamcars@gmail.com</a>
-                </div>
+                <a class="text-body px-3"><i class="fa fa-envelope mr-2"></i>Welcome, <%= clientName %>!</a>
+                <% }%>
             </div>
-            <div class="col-md-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-body px-3" href="">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a class="text-body px-3" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-body px-3" href="https://www.linkedin.com/in/ohassnao/">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-body px-3" href="https://www.instagram.com/oussama__hassnaoui/">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a class="text-body pl-3" href="">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
+        </div>
+        <div class="col-md-6 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <!-- Your social media links -->
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
+</div>
+<!-- Topbar End -->
 
 
     <!-- Navbar Start -->
@@ -76,22 +75,22 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="reservation.html" class="nav-item nav-link">Reservation</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <a href="index.jsp" class="nav-item nav-link active">Home</a>
+                        <a href="reservation.jsp" class="nav-item nav-link">Reservation</a>
+                        <a href="service.jsp" class="nav-item nav-link">Service</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
+                                <a href="car.jsp" class="dropdown-item">Car Listing</a>
+                                <a href="detail.jsp" class="dropdown-item">Car Detail</a>
+                                <a href="booking.jsp" class="dropdown-item">Car Booking</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">The Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="team.jsp" class="dropdown-item">The Team</a>
+                                <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
                             </div>
                         </div>
                         <a href="Register.jsp" class="nav-item nav-link">Register</a>
@@ -118,14 +117,19 @@
                     data-target="#time" data-toggle="datetimepicker" />
             </div>
         </div>
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <select class="custom-select px-4 mb-3" style="height: 50px;">
-                <option selected>Select A Car</option>
-                <option value="1">Car 1</option>
-                <option value="2">Car 1</option>
-                <option value="3">Car 1</option>
-            </select>
-        </div>
+        <select class="custom-select px-4 mb-3" style="height: 50px;">
+<%
+    java.util.ArrayList<String> marqueList = (java.util.ArrayList<String>) request.getAttribute("marqueList");
+    if (marqueList != null) {
+        for (String marque : marqueList) {
+%>
+        <option value="<%= marque %>"><%= marque %></option>
+<%
+        }
+    }
+%>
+			
+        </select>
         <div class="col-xl-2 col-lg-4 col-md-6 px-2">
             <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
         </div>

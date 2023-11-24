@@ -1,4 +1,4 @@
-package servlet;
+package ClientDAO;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -41,7 +41,9 @@ public class ClientLogin extends HttpServlet {
 
             if (client != null && client.getMotdepasse().equals(password)) {
                 // Successful login
-                response.getWriter().write("Login successful! Welcome, " + client.getNom());
+                String nom = client.getNom();
+                request.setAttribute("nom", nom);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
                 // Failed login
                 response.getWriter().write("Login failed. Please check your username and password.");

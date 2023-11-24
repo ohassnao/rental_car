@@ -56,7 +56,7 @@
 
     </form>
 
-    <p class="text--center"> <a href="index.html">Back to main page</a> <svg class="icon">
+    <p class="text--center"> <a href="index.jsp">Back to main page</a> <svg class="icon">
         <use xlink:href="#icon-arrow-right"></use>
       </svg></p>
 

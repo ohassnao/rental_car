@@ -1,7 +1,8 @@
-package servlet;
+package ClientDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,7 +69,8 @@ public class ClientRegister extends HttpServlet {
                 // Commit the transaction
                 tx.commit();
 
-                response.sendRedirect("index.html");
+                request.setAttribute("nom", nom);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
