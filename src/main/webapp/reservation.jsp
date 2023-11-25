@@ -1,8 +1,12 @@
-<%@	page import="java.util.List"%>
-<%@	page import="DTO.Voiture"%>
-<%@	page import="service.VoitureService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="java.io.*"%>
+<%@ page import="DAO.ReservationDAO" %>
+<%@ page import="DTO.Reservation" %>
+<%@ page import="DTO.Voiture" %>
+<%@ page import="service.reservationService"%>>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.time.temporal.ChronoUnit" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,14 +48,6 @@
                     <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+212 10 19 24 16</a>
                     <span class="text-body">|</span>
                     <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>Dreamcar@gmail.com</a>
-                                    <% 
-                    // Retrieve the client's name from the request attribute
-                    String clientName = (String) request.getAttribute("nom");
-                    if (clientName != null && !clientName.isEmpty()) {
-                %>
-                    <span class="text-body">|</span>
-                <a class="text-body px-3"><i class="fa fa-envelope mr-2"></i>Welcome, <%= clientName %>!</a>
-                <% }%>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-right">
@@ -90,22 +86,22 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.jsp" class="nav-item nav-link">Home</a>
-                        <a href="about.jsp" class="nav-item nav-link">About</a>
-                        <a href="service.jsp" class="nav-item nav-link">Service</a>
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="reservation.html" class="nav-item nav-link active">Reservation</a>
+                        <a href="service.html" class="nav-item nav-link">Service</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Cars</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.jsp" class="dropdown-item active">Car Listing</a>
-                                <a href="detail.jsp" class="dropdown-item">Car Detail</a>
-                                <a href="booking.jsp" class="dropdown-item">Car Booking</a>
+                                <a href="car.html" class="dropdown-item">Car Listing</a>
+                                <a href="detail.html" class="dropdown-item">Car Detail</a>
+                                <a href="booking.html" class="dropdown-item">Car Booking</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.jsp" class="dropdown-item">The Team</a>
-                                <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
+                                <a href="team.html" class="dropdown-item">The Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                             </div>
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -118,7 +114,7 @@
 
 
     <!-- Search Start -->
-    <div class="container-fluid bg-white pt-3 px-lg-5">
+<div class="container-fluid bg-white pt-3 px-lg-5">
     <div class="row mx-n2 justify-content-center"> <!-- Add 'justify-content-center' to center -->
         <div class="col-xl-2 col-lg-4 col-md-6 px-2">
             <div class="date mb-3" id="date" data-target-input="nearest">
@@ -151,89 +147,80 @@
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-white mb-3">Car Listing</h1>
+        <h1 class="display-3 text-uppercase text-white mb-3">Reservation Form</h1>
         <div class="d-inline-flex text-white">
             <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
             <h6 class="text-body m-0 px-3">/</h6>
-            <h6 class="text-uppercase text-body m-0">Car Listing</h6>
+            <h6 class="text-uppercase text-body m-0">Reservation form</h6>
         </div>
     </div>
     <!-- Page Header Start -->
 
 
-    <!-- Rent A Car Start -->
+    <!-- About Start -->
     <div class="container-fluid py-5">
-		<center><h2>Car Table</h2></center><br>
-				<table class="table text-center">
-					<thead>
-            <tr>
-                <th>ID</th>
-                <th>Marque</th>
-                <th>Modele</th>
-                <th>Annee</th>
-                <th>Disponibilite</th>
-                <th></th>
-            </tr>
-					</thead>
-					<tbody>
-						<%
-							VoitureService voitureService = new VoitureService();
-							List<Voiture> voiture = voitureService.getAllVoiture();
-							for (Voiture v : voiture) {
-						%>
-						<tr>
-							<th scope="row"><%=v.getId()%></th>
-							<td><%=v.getMarque()%></td>
-							<td><%=v.getModele()%></td>
-							<td><%=v.getAnnee()%></td>
-							<td><%=v.isDisponibilite()%></td>
-							                <td>
-                    <% if (v.isDisponibilite()) { %>
-                    <a href="form_reservation.jsp">
-                        <button>Reserver</button>
-                    </a>
-                    <% } else { %>
-                        <span>Reserved</span>
-                    <% } %>
-                </td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
-</table>
-    </div>
-    <!-- Rent A Car End -->
+			
+			
+			<%
+			    // Assuming you have a method to get all reservations in your ReservationDAO
+			    
+				reservationService resservice = new reservationService();
+			    List<Reservation> reservations = resservice.getReservationsForClient();
+			%>
+			
+			<center><h2>Reservation Table</h2></center>
+			
+			<table class="table text-center">
+			    <tr>
+			        <th>ID</th>
+			        <th>Start Date</th>
+			        <th>End Date</th>
+			        <th>Number of days</th>
+			        <th>Total Price</th>
+			        <th>Marque</th>
+			        <th>Modele</th>
+			    </tr>
+			    <% for (Reservation reservation : reservations) { %>
+                    <% 
+                        java.util.Date debut = reservation.getDateDebut();
+                        java.util.Date fin = reservation.getDateFin();
+                        long difference = (fin.getTime() - debut.getTime()) / (1000 * 60 * 60 * 24);
+                        System.out.println(difference);
+                      	Voiture voiture = reservation.getVoiture();
+                      	float prix_voiture = voiture.getPrix_jour();
+                      	System.out.println(prix_voiture);
+                      	String voiture_marque = voiture.getMarque();
+                      	String voiture_modele = voiture.getModele();
+                      	
+          				float total_price = difference * prix_voiture;
+                    %>
+                    <tr>
+			            <td><%= reservation.getId() %></td>
+			            <td><%= reservation.getDateDebut() %></td>
+			            <td><%= reservation.getDateFin() %></td>
+			            <td>
+
+                    <%= difference %>
+                		</td>
+                		<td>
+                			<%
+                			
+
+                			%>
+                			<%=total_price%>
+                		</td>
+              			<td><%=voiture_marque%></td>
+              			<td><%=voiture_modele%></td>
+                	
+			        </tr>
+			    <% } %>
+			</table>
+        
+    </div> 
+    <!-- About End -->
 
 
-    <!-- Banner Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row mx-0">
-                <div class="col-lg-6 px-0">
-                    <div class="px-5 bg-secondary d-6flex align-items-center justify-content-between" style="height: 350px;">
-                        <img class="img-fluid flex-shrink-0 ml-n5 w-50 mr-4" src="img/banner-left.png" alt="">
-                        <div class="text-right">
-                            <h3 class="text-uppercase text-light mb-3">Want to be driver?</h3>
-                            <p class="mb-4">Lorem justo sit sit ipsum eos lorem kasd, kasd labore</p>
-                            <a class="btn btn-primary py-2 px-4" href="">Start Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 px-0">
-                    <div class="px-5 bg-dark d-flex align-items-center justify-content-between" style="height: 350px;">
-                        <div class="text-left">
-                            <h3 class="text-uppercase text-light mb-3">Looking for a car?</h3>
-                            <p class="mb-4">Lorem justo sit sit ipsum eos lorem kasd, kasd labore</p>
-                            <a class="btn btn-primary py-2 px-4" href="">Start Now</a>
-                        </div>
-                        <img class="img-fluid flex-shrink-0 mr-n5 w-50 ml-4" src="img/banner-right.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
+
 
 
     <!-- Vendor Start -->
@@ -359,21 +346,5 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
-<style>
-    /* Style the button */
-    a button {
-        background-color: #F77D0A; /* Button background color */
-        color: white; /* Text color */
-        padding: 10px 20px; /* Padding */
-        border: none; /* Remove border */
-        border-radius: 5px; /* Add border radius for rounded corners */
-        cursor: pointer; /* Show pointer cursor on hover */
-        text-decoration: none; /* Remove default link underline */
-    }
 
-    /* Hover effect */
-    a button:hover {
-        opacity: 0.8; /* Reduce opacity on hover */
-    }
-</style>
 </html>

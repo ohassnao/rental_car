@@ -31,12 +31,7 @@ public class VoitureService {
 		return voitureDao.getAllVoiture();
 	}
 	
-// get all marque
-	public List<Voiture> getAllMarque() {
-		VoitureDao voitureDao = new VoitureDao();
-		return voitureDao.getAllMarque();
-	}
-	
+
 //	delete voiture
 	public Voiture deleteVoiture(int id) {
 		VoitureDao voitureDao = new VoitureDao();

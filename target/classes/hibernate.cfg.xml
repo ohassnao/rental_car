@@ -10,7 +10,7 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
         <!-- Other Hibernate properties -->
-        <mapping class="classes.Client"/>
+        <mapping class="DTO.Client"/>
         <!-- Other mappings -->
     </session-factory>
 </hibernate-configuration>

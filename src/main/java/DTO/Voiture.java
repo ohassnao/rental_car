@@ -29,15 +29,35 @@ public class Voiture {
     @Column(name="Disponibilite")
     private boolean disponibilite;
     
-    public Voiture() {
+    @Column(name="prix_jour")
+    private float prix_jour;
+     
+    public Long getID_VOITURE() {
+		return ID_VOITURE;
+	}
+
+	public void setID_VOITURE(Long iD_VOITURE) {
+		ID_VOITURE = iD_VOITURE;
+	}
+
+	public float getPrix_jour() {
+		return prix_jour;
+	}
+
+	public void setPrix_jour(float prix_jour) {
+		this.prix_jour = prix_jour;
+	}
+
+	public Voiture() {
         // Default no-argument constructor
     }
 
-    public Voiture(String marque, String modele, int annee, boolean disponibilite) {
+    public Voiture(String marque, String modele, int annee, boolean disponibilite, float prix_jour) {
         this.marque = marque;
         this.modele = modele;
         this.annee = annee;
         this.disponibilite = disponibilite;
+        this.prix_jour = prix_jour;
     }
 
     // Getters and Setters

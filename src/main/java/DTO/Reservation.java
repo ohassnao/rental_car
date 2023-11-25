@@ -11,7 +11,7 @@ public class Reservation  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long ID_RESERVATION;
 
     @Temporal(TemporalType.DATE)
     private Date dateDebut;
@@ -19,13 +19,18 @@ public class Reservation  {
     @Temporal(TemporalType.DATE)
     private Date dateFin;
 
+    @Column(name="nbr_jour")
+    private int nbr_jour;
+    
     @ManyToOne
     @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID_CLIENT")
     private Client client;
     
     @OneToOne
     @JoinColumn(name = "ID_VOITURE", referencedColumnName = "ID_VOITURE")
-    private Voiture voitures;
+    private Voiture voiture;
+    
+    
 
 
 
@@ -44,11 +49,11 @@ public class Reservation  {
 
     // Getters and Setters
     public Long getId() {
-        return id;
+        return ID_RESERVATION;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.ID_RESERVATION = id;
     }
 
     public Date getDateDebut() {
@@ -67,21 +72,21 @@ public class Reservation  {
         this.dateFin = dateFin;
     }
 
-//    public Client getClient() {
-//        return client;
-//    }
-//
-//    public void setClient(Client client) {
-//        this.client = client;
-//    }
-//
-//    public Voiture getVoiture() {
-//        return voiture;
-//    }
-//
-//    public void setVoiture(Voiture voiture) {
-//        this.voiture = voiture;
-//    }
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Voiture getVoiture() {
+        return voiture;
+    }
+
+    public void setVoiture(Voiture voiture) {
+        this.voiture = voiture;
+    }
 
     // Other methods
     public double calculerCoûtTotal() {
@@ -92,7 +97,7 @@ public class Reservation  {
     @Override
     public String toString() {
         return "Reservation{" +
-                "id=" + id +
+                "id=" + ID_RESERVATION +
                 ", dateDebut=" + dateDebut +
                 ", dateFin=" + dateFin +
 //                ", client=" + client +

@@ -128,8 +128,7 @@
 							List<Voiture> voiture = voitureService.getAllVoiture();
 							for (Voiture v : voiture) {
 						%>
-							        				<option value="<%=v.getMarque()%>"><%=v.getMarque()%></option>
-
+							<option value="<%=v.getMarque()%>"><%=v.getMarque()%></option>
 						<%
 							}
 						%>
