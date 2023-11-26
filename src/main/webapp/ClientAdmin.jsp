@@ -75,7 +75,7 @@
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Royal Cars</h1>
+                    <h1 class="text-uppercase text-primary mb-1">Dream Cars</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -153,13 +153,10 @@
                 <td><%=client.getAdresse() %></td>
                 <td><%=client.getEmail() %></td>
                 <td>
-                    <form action="updateClientServlet" method="post">
-                        <input type="hidden" name="clientId" value="<%=client.getId() %>">
-                        <button type="submit">Update</button>
-                    </form>
+                     <a href="UpdateClient.jsp?clientId=<%=client.getId() %>" ><button type="submit">Update</button></a>
                 </td>
                 <td>
-                    <form action="deleteServlet" method="post">
+                    <form action="deleteClientServlet" method="post">
                         <input type="hidden" name="clientId" value="<%=client.getId() %>">
                         <button type="submit">Delete</button>
                     </form>

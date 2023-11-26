@@ -17,22 +17,22 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID_CLIENT;
     
-    @Column(name = "NOM", length=100 , nullable= false)
+    @Column(name = "NOM", length=100)
     private String nom;
     
-    @Column(name = "PRENOM", length=100 , nullable= false)
+    @Column(name = "PRENOM", length=100)
     private String prenom;
     
-    @Column(name = "USERNAME", length=100 , nullable= false, unique= true)
+    @Column(name = "USERNAME", length=100 )
     private String username;
     	
-    @Column(name = "PASSWORD", length=100 , nullable= false)
+    @Column(name = "PASSWORD", length=100 )
     private String motdepasse;
     
-    @Column(name = "ADRESSE", length=100 , nullable= false)
+    @Column(name = "ADRESSE", length=100 )
     private String adresse;
     
-    @Column(name = "ADRESSMAIL", length=100 , nullable= false)
+    @Column(name = "ADRESSMAIL", length=100 )
     private String email;
     
     

@@ -34,6 +34,18 @@
   	<description></description>
   	<servlet-class>Servlet.DeleteResAdminServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>deleteClientServlet</servlet-name>
+  	<display-name>deleteClientServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlet.deleteClientServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>UpdateClientServlet</servlet-name>
+  	<display-name>UpdateClientServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlet.UpdateClientServlet</servlet-class>
+  </servlet>
 
 
 
@@ -49,6 +61,8 @@
   	<servlet-name>ReservationServlet</servlet-name>
   	<url-pattern>/ReservationServlet</url-pattern>
   </servlet-mapping>
+
+
 
 
 
