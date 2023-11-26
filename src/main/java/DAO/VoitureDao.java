@@ -4,9 +4,10 @@ import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
-
+import jakarta.persistence.TypedQuery;
 import DTO.Voiture; 
 
  public class VoitureDao {
@@ -46,6 +47,22 @@ import DTO.Voiture;
 			Voiture voiture = entityManager.find(Voiture.class, id);
 			return voiture;
 		}
+		
+		public List<Voiture> getVoitureByMarque(String marque) {
+		    String jpql = "SELECT v FROM Voiture v WHERE v.marque = :marque";
+		    TypedQuery<Voiture> query = entityManager.createQuery(jpql, Voiture.class);
+		    query.setParameter("marque", marque);
+
+		    List<Voiture> voitures = null;
+		    try {
+		        voitures = query.getResultList();
+		    } catch (NoResultException e) {
+		        // Handle if no car is found for the given brand
+		    }
+
+		    return voitures;
+		}
+
 
 //		get all voiture
 		public List<Voiture> getAllVoiture() {

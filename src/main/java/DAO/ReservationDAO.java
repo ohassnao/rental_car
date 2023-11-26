@@ -3,7 +3,7 @@ import java.sql.Date;
 
 import java.util.List;
 
-import DTO.Reservation;
+import DTO.*;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -20,7 +20,9 @@ public class ReservationDAO {
     public Reservation saveReservation(Reservation reservation) {
         reservation.setDateDebut(reservation.getDateDebut());
         reservation.setDateFin(reservation.getDateFin());
-        
+        reservation.setVoiture(reservation.getVoiture());
+        reservation.setClient(reservation.getClient());
+        reservation.setNbr_jour(reservation.getNbr_jour());
         entityTransaction.begin();
         entityManager.persist(reservation);
         entityTransaction.commit();
@@ -34,6 +36,7 @@ public class ReservationDAO {
         
         existingReservation.setDateDebut(reservation.getDateDebut());
         existingReservation.setDateFin(reservation.getDateFin());
+        existingReservation.setNbr_jour(reservation.getNbr_jour());
         
         entityTransaction.begin();
         entityManager.merge(existingReservation);

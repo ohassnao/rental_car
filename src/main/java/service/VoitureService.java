@@ -24,6 +24,10 @@ public class VoitureService {
 		VoitureDao voitureDao = new VoitureDao();
 		return voitureDao.getVoitureById(id);
 	}
+	public List<Voiture> getVoitureByMarque(String marque) {
+		VoitureDao voitureDao = new VoitureDao();
+		return voitureDao.getVoitureByMarque(marque);
+	}
 	
 //	get all voiture
 	public List<Voiture> getAllVoiture() {

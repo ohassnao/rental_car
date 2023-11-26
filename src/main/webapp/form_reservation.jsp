@@ -1,3 +1,14 @@
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.ParseException" %>
+<%@ page import="java.util.Calendar" %>
+<%@	page import="DTO.*"%>
+<%@	page import="DAO.*"%>
+<%@	page import="service.*"%>
+<%@	page import="java.util.List"%>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +49,17 @@
                     <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+212 10 19 24 16</a>
                     <span class="text-body">|</span>
                     <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>Dreamcar@gmail.com</a>
+                                                        <% 
+                                   HttpSession session1 = request.getSession(false);
+
+                               	if (session1 != null) {
+                                	String nomClient = (String) session1.getAttribute("prenom");
+                                	System.out.println(nomClient);
+                %>
+                    <span class="text-body">|</span>
+                <a class="text-body px-3"><i class="fa fa-envelope mr-2"></i>Welcome, <%= nomClient %>!</a>
+                <% }
+                %>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-right">
@@ -69,7 +91,7 @@
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Royal Cars</h1>
+                    <h1 class="text-uppercase text-primary mb-1">Dream Cars</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -150,45 +172,55 @@
     <!-- About Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
-<div class="container mt-5">
-    <form action="process_reservation.jsp" method="post">
+	<div class="container mt-5">
+    	<form action="reservationServlet" method="post">
         <div class="form-group">
             <label for="clientId">Client ID:</label>
-            <input type="text" class="form-control" id="clientId" name="clientId" required>
+                <% 
+                 	if (session1 != null) {
+                 	int idClient = (int) session1.getAttribute("ID_CLIENT");
+                %>
+            <input type="text" class="form-control" id="clientId" name="clientId" value="<%=idClient%>"required>
+                <% }
+                %>
         </div>
-        
-        <div class="form-group">
-            <label for="startDate">Start Date:</label>
-            <input type="date" class="form-control" id="startDate" name="startDate" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="carId">Car ID:</label>
-            <input type="text" class="form-control" id="carId" name="carId" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="numberOfDays">Number of Days:</label>
-            <input type="number" class="form-control" id="numberOfDays" name="numberOfDays" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="endDate">End Date:</label>
-            <input type="date" class="form-control" id="endDate" name="endDate" required>
-        </div>
-        
+        <%
+		String carMarque = request.getParameter("carMarque");
+		String carModele = request.getParameter("carModele");
+		int idvoiture = Integer.parseInt(request.getParameter("idvoiture"));
+
+
+		if (carMarque != null && carModele != null) {
+			%>
+			<div class="form-group">
+			    <label for="carmarque">Car Marque:</label>
+			    <input type="text" class="form-control" id="carmarque" name="carmarque" value="<%=carMarque%>" required>
+			</div>
+			<div class="form-group">
+			    <label for="carmodele">Car Modele:</label>
+			    <input type="text" class="form-control" id="carmodele" name="carmodele" value="<%=carModele%>" required>
+			</div>
+				<div class="form-group">
+			    <label for="carmodele">ID Voiture:</label>
+			    <input type="number" class="form-control" id="idvoiture" name="idvoiture" value="<%=idvoiture%>" required>
+			</div>
+			<%
+}
+%>
+
+				<div class="form-group">
+    		<label for="endDate">Nombre De Jour:</label>
+    		<input type="number" class="form-control" id="nbr_jour" name="nbr_jour" " required>
+		</div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-            
+
             </div>
         </div>
     </div>
+    
     <!-- About End -->
-
-
-
-
 
     <!-- Vendor Start -->
     <div class="container-fluid py-5">

@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login In</title>
+    <title>Registration Form</title>
     <link rel="stylesheet" href="Style.css">
 </head>
 <body class="align">
 
   <div class="grid">
 
-    <form action="Login" method="post" class="form login">
+    <form action="LoginAdmin" method="post" class="form login">
 
 
       <div class="form__field">
@@ -33,9 +33,7 @@
 
     </form>
 
-    <p class="text--center">Not a member? <a href="Register.jsp">Sign up now</a> <svg class="icon">
-        <use xlink:href="#icon-arrow-right"></use>
-      </svg></p>
+
 
   </div>
 

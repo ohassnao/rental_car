@@ -48,13 +48,16 @@
                 <span class="text-body">|</span>
                 <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>Dreamcars@gmail.com</a>
                 <% 
-                    // Retrieve the client's name from the request attribute
-                    String clientName = (String) request.getAttribute("nom");
-                    if (clientName != null && !clientName.isEmpty()) {
+                                   HttpSession session1 = request.getSession(false);
+
+                               	if (session1 != null) {
+                                	String nomClient = (String) session1.getAttribute("prenom");
+                                	System.out.println(nomClient);
                 %>
                     <span class="text-body">|</span>
-                <a class="text-body px-3"><i class="fa fa-envelope mr-2"></i>Welcome, <%= clientName %>!</a>
-                <% }%>
+                <a class="text-body px-3"><i class="fa fa-envelope mr-2"></i>Welcome, <%= nomClient %>!</a>
+                <% }
+                %>
             </div>
         </div>
         <div class="col-md-6 text-center text-lg-right">
@@ -107,37 +110,24 @@
 
 
     <!-- Search Start -->
+    <form id="searchForm" action="SearchByMarqueServlet" method="post">
     <div class="container-fluid bg-white pt-3 px-lg-5">
     <div class="row mx-n2 justify-content-center"> <!-- Add 'justify-content-center' to center -->
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <div class="date mb-3" id="date" data-target-input="nearest">
-                <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Date"
-                    data-target="#date" data-toggle="datetimepicker" />
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <div class="time mb-3" id="time" data-target-input="nearest">
-                <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
-                    data-target="#time" data-toggle="datetimepicker" />
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-        		<select class="custom-select px-4 mb-3" style="height: 50px;">
-						<%
-							VoitureService voitureService = new VoitureService();
-							List<Voiture> voiture = voitureService.getAllVoiture();
-							for (Voiture v : voiture) {
-						%>
-							<option value="<%=v.getMarque()%>"><%=v.getMarque()%></option>
-						<%
-							}
-						%>
-        		</select>
-                </div>
-        
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
-        </div>
+<form action="SearchByMarqueServlet" method="post">
+    <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+        <select name="marque" class="custom-select px-4 mb-3" style="height: 50px;">
+            <% VoitureService voitureService = new VoitureService();
+            List<Voiture> voiture = voitureService.getAllVoiture();
+            for (Voiture v : voiture) { %>
+                <option value="<%=v.getMarque()%>"><%=v.getMarque()%></option>
+            <% } %>
+        </select>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+        <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
+    </div>
+</form>
+
     </div>
 </div>
 
@@ -155,7 +145,7 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">Rent A Car</h4>
                             <h1 class="display-1 text-white mb-md-4">Best Rental Cars In Your Location</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
+                            <a href="#searchForm" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
                         </div>
                     </div>
                 </div>

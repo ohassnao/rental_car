@@ -16,6 +16,27 @@
   	<description></description>
   	<servlet-class>VoitureDAO.VoitureServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>reservationServlet</servlet-name>
+  	<display-name>reservationServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlet.reservationServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ReservationServlet</servlet-name>
+  	<display-name>ReservationServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlet.reservationServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DeleteResAdminServlet</servlet-name>
+  	<display-name>DeleteResAdminServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlet.DeleteResAdminServlet</servlet-class>
+  </servlet>
+
+
+
   <servlet-mapping>
   	<servlet-name>Fetchmarque</servlet-name>
   	<url-pattern>/Fetchmarque</url-pattern>
@@ -24,4 +45,13 @@
   	<servlet-name>VoitureServlet</servlet-name>
   	<url-pattern>/VoitureServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ReservationServlet</servlet-name>
+  	<url-pattern>/ReservationServlet</url-pattern>
+  </servlet-mapping>
+
+
+
+
+
 </web-app>

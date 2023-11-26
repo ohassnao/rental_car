@@ -1,13 +1,8 @@
-<%@ page import="java.util.*" %>
-<%@ page import="java.io.*"%>
+<%@ page import="java.util.List" %>
+<%@ page import="DAO.*	" %>
 <%@ page import="DTO.*" %>
-<%@ page import="service.*"%>
+<%@ page import="service.reservationService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.time.temporal.ChronoUnit" %>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,18 +43,7 @@
                 <div class="d-inline-flex align-items-center">
                     <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+212 10 19 24 16</a>
                     <span class="text-body">|</span>
-                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>Dreamcar@gmail.com</a>                    
-                                    <% 
-                                   HttpSession session1 = request.getSession(false);
-
-                               	if (session1 != null) {
-                                	String nomClient = (String) session1.getAttribute("prenom");
-                                	System.out.println(nomClient);
-                %>
-                    <span class="text-body">|</span>
-                <a class="text-body px-3"><i class="fa fa-envelope mr-2"></i>Welcome, <%= nomClient %>!</a>
-                <% }
-                %>
+                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>Dreamcar@gmail.com</a>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-right">
@@ -91,32 +75,16 @@
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Royal Cars</h1>
+                    <h1 class="text-uppercase text-primary mb-1">Dream Cars</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.jsp" class="nav-item nav-link">Home</a>
-                        <a href="reservation.jsp" class="nav-item nav-link active">Reservation</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.jsp" class="dropdown-item">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">The Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="ClientAdmin.jsp" class="nav-item nav-link">Client</a>
+                        <a href="reservationAdmin.jsp" class="nav-item nav-link active">Reservation</a>
+                        <a href="contact.html" class="nav-item nav-link">Deconnexion</a>
                     </div>
                 </div>
             </nav>
@@ -128,29 +96,7 @@
     <!-- Search Start -->
 <div class="container-fluid bg-white pt-3 px-lg-5">
     <div class="row mx-n2 justify-content-center"> <!-- Add 'justify-content-center' to center -->
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <div class="date mb-3" id="date" data-target-input="nearest">
-                <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Date"
-                    data-target="#date" data-toggle="datetimepicker" />
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <div class="time mb-3" id="time" data-target-input="nearest">
-                <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
-                    data-target="#time" data-toggle="datetimepicker" />
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <select class="custom-select px-4 mb-3" style="height: 50px;">
-                <option selected>Select A Car</option>
-                <option value="1">Car 1</option>
-                <option value="2">Car 1</option>
-                <option value="3">Car 1</option>
-            </select>
-        </div>
-        <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
-        </div>
+        
     </div>
 </div>
 
@@ -159,83 +105,76 @@
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-white mb-3">Reservation</h1>
+        <h1 class="display-3 text-uppercase text-white mb-3">Reservation List</h1>
         <div class="d-inline-flex text-white">
             <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
             <h6 class="text-body m-0 px-3">/</h6>
-            <h6 class="text-uppercase text-body m-0">Reservation</h6>
+            <h6 class="text-uppercase text-body m-0">Reservation List</h6>
         </div>
     </div>
     <!-- Page Header Start -->
 
 
     <!-- About Start -->
-<%
-    int idClient = -1; // Default value or handle if ID_CLIENT isn't found
-
-    if (session != null) {
-        Object idObj = session.getAttribute("ID_CLIENT");
-        if (idObj != null) {
-            idClient = (int) idObj;
-            System.out.println(idClient);
-
-            // Access the reservations for the retrieved idClient
-            reservationService resService = new reservationService();
-            List<Reservation> reservations = resService.getReservationsForClient(idClient);
-%>
-
 <div class="container-fluid py-5">
     <center><h2>Reservation Table</h2></center>
     <table class="table text-center">
         <tr>
             <th>ID</th>
 
-            <th>Number of days</th>
-            <th>Total Price</th>
+
             <th>Marque</th>
             <th>Modele</th>
+			<th>Number of Days</th>
+			<th>Total Price</th>
             <th>Delete</th>
-            <th>status de Paiement</th>
+            <th>Update</th>
+
+
+            
+ 
         </tr>
-        <% for (Reservation reservation : reservations) { %>
+        <% 
+        reservationService resService = new reservationService();
+        List<Reservation> reservations = resService.getAllReservation();
+        for (Reservation reservation : reservations) { %>
             <% 
 
                 Voiture voiture = reservation.getVoiture();
                 float prix_voiture = voiture.getPrix_jour();
+                int Nbr_jour = reservation.getNbr_jour();
+                float Total_price = Nbr_jour * prix_voiture;
                 String voiture_marque = voiture.getMarque();
                 String voiture_modele = voiture.getModele();
                 
-                int nbr_jour = reservation.getNbr_jour();
-                float total_price = nbr_jour * prix_voiture;
+                //int nbr_jour = reservation.getNbr_jour();
+                //float total_price = nbr_jour * prix_voiture;
             %>
             <tr>
                 <td><%= reservation.getId() %></td>
 
-                <td><%= reservation.getNbr_jour() %></td>
-                <td><%= total_price %></td>
+
                 <td><%= voiture_marque %></td>
                 <td><%= voiture_modele %></td>
+                <td><%= Nbr_jour%></td>
+                <td><%= Total_price%></td>
                 <td>
-                    <form action="DeleteReservationServlet" method="post">
+                    <form action="DeleteResAdminServlet" method="post">
                         <input type="hidden" name="reservationId" value="<%= reservation.getId() %>">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
                 <td>
-                    <form action="PaimentEnLigneServlet" method="post">
+                    <form action="UpdateResAdminServlet" method="post">
                         <input type="hidden" name="reservationId" value="<%= reservation.getId() %>">
-                        <button type="submit">Payer En Ligne</button>
+                        <button type="submit">Update</button>
                     </form>
                 </td>
+               
             </tr>
         <% } %>
     </table>
 </div>
-
-<%
-        }
-    }
-%>
     <!-- About End -->
 
 

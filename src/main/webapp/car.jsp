@@ -1,8 +1,11 @@
 <%@	page import="java.util.List"%>
-<%@	page import="DTO.Voiture"%>
-<%@	page import="service.VoitureService"%>
+<%@	page import="DTO.*"%>
+<%@	page import="DAO.*"%>
+<%@	page import="service.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,14 +47,17 @@
                     <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+212 10 19 24 16</a>
                     <span class="text-body">|</span>
                     <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>Dreamcar@gmail.com</a>
-                                    <% 
-                    // Retrieve the client's name from the request attribute
-                    String clientName = (String) request.getAttribute("nom");
-                    if (clientName != null && !clientName.isEmpty()) {
+                                   <% 
+                                   HttpSession session1 = request.getSession(false);
+
+                               	if (session1 != null) {
+                                	String nomClient = (String) session1.getAttribute("prenom");
+                                	System.out.println(nomClient);
                 %>
                     <span class="text-body">|</span>
-                <a class="text-body px-3"><i class="fa fa-envelope mr-2"></i>Welcome, <%= clientName %>!</a>
-                <% }%>
+                <a class="text-body px-3"><i class="fa fa-envelope mr-2"></i>Welcome, <%= nomClient %>!</a>
+                <% }
+                %>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-right">
@@ -91,7 +97,7 @@
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
                         <a href="index.jsp" class="nav-item nav-link">Home</a>
-                        <a href="about.jsp" class="nav-item nav-link">About</a>
+                        <a href="reservation.jsp" class="nav-item nav-link">Reservation</a>
                         <a href="service.jsp" class="nav-item nav-link">Service</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Cars</a>
@@ -162,10 +168,10 @@
 
 
     <!-- Rent A Car Start -->
-    <div class="container-fluid py-5">
-		<center><h2>Car Table</h2></center><br>
-				<table class="table text-center">
-					<thead>
+<div class="container-fluid py-5">
+    <center><h2>Car Table</h2></center><br>
+    <table class="table text-center">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>Marque</th>
@@ -174,35 +180,46 @@
                 <th>Disponibilite</th>
                 <th></th>
             </tr>
-					</thead>
-					<tbody>
-						<%
-							VoitureService voitureService = new VoitureService();
-							List<Voiture> voiture = voitureService.getAllVoiture();
-							for (Voiture v : voiture) {
-						%>
-						<tr>
-							<th scope="row"><%=v.getId()%></th>
-							<td><%=v.getMarque()%></td>
-							<td><%=v.getModele()%></td>
-							<td><%=v.getAnnee()%></td>
-							<td><%=v.isDisponibilite()%></td>
-							                <td>
-                    <% if (v.isDisponibilite()) { %>
-                    <a href="form_reservation.jsp">
-                        <button>Reserver</button>
-                    </a>
-                    <% } else { %>
-                        <span>Reserved</span>
-                    <% } %>
-                </td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
-</table>
-    </div>
+        </thead>
+<tbody>
+    <%
+        VoitureService voitureService = new VoitureService();
+        List<Voiture> voiture = voitureService.getAllVoiture();
+        reservationService resservice = new reservationService();
+        List<Reservation> reservations = resservice.getAllReservation();
+
+        for (Voiture v : voiture) {
+            boolean isAvailable = true;
+
+            for (Reservation r : reservations) {
+                if (r.getVoiture().getID_VOITURE() == v.getId()) {
+                    isAvailable = false;
+                    break;
+                }
+            }
+    %>
+    <tr>
+        <th scope="row"><%=v.getId()%></th>
+        <td><%=v.getMarque()%></td>
+        <td><%=v.getModele()%></td>
+        <td><%=v.getAnnee()%></td>
+        <td><%=isAvailable%></td>
+        <td>
+            <% if (isAvailable) { %>
+                <a href="form_reservation.jsp?idvoiture=<%=v.getID_VOITURE()%>&carMarque=<%=v.getMarque()%>&carModele=<%=v.getModele()%>">
+                    <button>Reserver</button>
+                </a>
+            <% } else { %>
+                <span>Reserved</span>
+            <% } %>
+        </td>
+    </tr>
+    <% } %>
+</tbody>
+
+    </table>
+</div>
+
     <!-- Rent A Car End -->
 
 

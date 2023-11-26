@@ -11,7 +11,7 @@ public class Reservation  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID_RESERVATION;
+    private int ID_RESERVATION;
 
     @Temporal(TemporalType.DATE)
     private Date dateDebut;
@@ -48,28 +48,28 @@ public class Reservation  {
     
 
     // Getters and Setters
-    public Long getId() {
+    public int getId() {
         return ID_RESERVATION;
     }
 
-    public void setId(Long id) {
-        this.ID_RESERVATION = id;
+    public void setId(int idClient) {
+        this.ID_RESERVATION = idClient;
     }
 
     public Date getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
+    public void setDateDebut(Date startDate) {
+        this.dateDebut = startDate;
     }
 
     public Date getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
+    public void setDateFin(Date startdDate) {
+        this.dateFin = startdDate;
     }
 
     public Client getClient() {
@@ -103,6 +103,14 @@ public class Reservation  {
 //                ", client=" + client +
 //                ", voiture=" + voiture +
                 '}';
+    }
+    
+    public void setNbr_jour(int nbr_jour) {
+		this.nbr_jour = nbr_jour;
+	}
+
+	public int getNbr_jour() {
+		return nbr_jour;
     }
     
 

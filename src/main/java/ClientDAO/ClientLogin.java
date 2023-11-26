@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,6 +42,11 @@ public class ClientLogin extends HttpServlet {
                     .uniqueResult();
 
             if (client != null && client.getMotdepasse().equals(password)) {
+                // Set the ID_CLIENT in the session upon successful login
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("ID_CLIENT", client.getId());
+                httpSession.setAttribute("nom", client.getNom());
+                httpSession.setAttribute("prenom", client.getPrenom());
                 String nom = client.getNom();
                 request.setAttribute("nom", nom);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -57,6 +63,7 @@ public class ClientLogin extends HttpServlet {
             session.close();
         }
     }
+
 
     @Override
     public void destroy() {

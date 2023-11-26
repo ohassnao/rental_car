@@ -103,7 +103,23 @@ public class PersonnelAgence {
     }
 
 
-    // Other methods
+    public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getMotdepasse() {
+		return motdepasse;
+	}
+
+	public void setMotdepasse(String motdepasse) {
+		this.motdepasse = motdepasse;
+	}
+
+	// Other methods
     @Override
     public String toString() {
         return "PersonnelAgence{" +
